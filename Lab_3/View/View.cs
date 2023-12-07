@@ -1,4 +1,5 @@
-﻿using Lab_3.Musics;
+﻿using Lab_3.Model;
+using Lab_3.Musics;
 using static Lab_3.Musics.EMusicFunctions;
 
 namespace Lab_3.View;
@@ -25,7 +26,11 @@ public class View
                     break;
                 case EMusicFunctions.add:
                     Music music = new Music();
-                    _musicCatalog.addMusic(music);
+                    _musicCatalog.addMusic(new MusicModel() {
+                        author = music.authorName,
+                        composition = music.compositionName,
+                        Id = music.Id
+                    });
                     break;
                 case EMusicFunctions.del:
                     Console.WriteLine("Input the full name of the track to remove:");

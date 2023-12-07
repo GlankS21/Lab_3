@@ -24,17 +24,12 @@ public class MusicRepository :IMusicRepository{
     
     //searchByAuthor
     public List<Music> FindByPartOfName(string PartOfName) {
-        var musics = GetAll().Select(MusicModel => {
-            return new Music(MusicModel.author, MusicModel.composition);
-        }).ToList();
-        List<Music> resultMusic = new List<Music>();
+        var musics = GetAll()
+            .Where(m => m.composition.Contains(PartOfName))
+            .Select(m => new Music(m.author, m.composition))
+            .ToList();
         
-        foreach (var _music in musics) {
-            if(_music.compositionName.Contains(PartOfName))
-                resultMusic.Add(_music);
-        }
-        
-        return resultMusic;
+        return musics;
     }
     //delete
     public void DeleteMusic(string title) {
@@ -46,4 +41,4 @@ public class MusicRepository :IMusicRepository{
         var elements = title.Split(" - ");
         return _dbContext.Musics.SingleOrDefault(music => music.author == elements[0] && music.composition == elements[1]);
     }
-}
+} 

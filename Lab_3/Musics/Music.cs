@@ -22,4 +22,4 @@ public class Music {
     public string getMusic() {
         return $"{authorName} - {compositionName}";
     }
-}
+} 
