@@ -24,29 +24,25 @@ public class MusicCatalog:IMusicCatalog
         return musics;
     }
 
-    public bool seachMusic(string PartOfName) {
+    public List<Music> seachMusic(string PartOfName) {
         List<Music> resultMusic = _musics.FindByPartOfName(PartOfName);
         
-        if (resultMusic.Count == 0) {
+        if (resultMusic.Count == 0) 
             Console.WriteLine("No one item was found by this criteria.");
-            return false;
+        else {
+            Console.WriteLine("Results found:");
+            foreach (var _music in resultMusic)
+                Console.WriteLine(_music.getMusic());
         }
-        Console.WriteLine("Results found:");
-        foreach (var _music in resultMusic)
-            Console.WriteLine(_music.getMusic());
-            return true;
+
+        return resultMusic;
     }
 
-    public void addMusic(Music music) {
-        var newMusicModel = new MusicModel() {
-            Id = music.Id,
-            author = music.authorName,
-            composition = music.compositionName
-        };
-        _musics.SetMusic(newMusicModel);
+    public void addMusic(MusicModel music) {
+        _musics.SetMusic(music);
     }
 
-    public void deleteMusic(string name) {
+    public bool deleteMusic(string name) {
         List<Music> musics = _musics.GetAll().Select(MusicModel => {
             return new Music(MusicModel.author, MusicModel.composition);
         }).ToList();
@@ -56,10 +52,10 @@ public class MusicCatalog:IMusicCatalog
             if (musics[i].getMusic() == name) {
                 Console.WriteLine($"Track '{name}' deleted.");
                 _musics.DeleteMusic(name);
-                find = true;
-                break;
+                return true;
             }
         }
-        if(!find) Console.WriteLine("Music not found");
+        Console.WriteLine("Music not found");
+        return false;
     }
 }
