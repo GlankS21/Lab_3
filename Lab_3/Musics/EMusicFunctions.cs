@@ -6,4 +6,4 @@ public enum EMusicFunctions {
     add,
     del,
     quit
-}
+} 

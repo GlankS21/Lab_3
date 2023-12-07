@@ -41,4 +41,4 @@ public class MusicRepository :IMusicRepository{
         var elements = title.Split(" - ");
         return _dbContext.Musics.SingleOrDefault(music => music.author == elements[0] && music.composition == elements[1]);
     }
-}
+} 

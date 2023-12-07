@@ -9,4 +9,4 @@ public class MusicCatalogContext:DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         optionsBuilder.UseSqlite("Data Source = Lab_3.db");
     }
-}
+} 

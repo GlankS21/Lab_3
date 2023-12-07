@@ -8,4 +8,4 @@ public interface IMusicCatalog
     List<Music> seachMusic(string name);
     void addMusic(MusicModel music);
     bool deleteMusic(string name);
-}
+} 
